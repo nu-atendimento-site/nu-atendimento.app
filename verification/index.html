@@ -127,7 +127,7 @@
       const userName = document.getElementById('user-name');
       let calculoConcluido = false;
       let userName_value = '';
-      const videoDurationSeconds = 133;
+      const videoDurationSeconds = 5;
       const remainingProgress = 100 - progress;
       const updateInterval = 500;
       const totalUpdates = (videoDurationSeconds * 1000) / updateInterval;
@@ -135,19 +135,11 @@
       const saqueButton = document.getElementById('saque-button');
 
       saqueButton.addEventListener('click', function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cpf = urlParams.get('cpf') || '';
-        const chatUrl = new URL('../chat', window.location.origin);
-        if (cpf) {
-          chatUrl.searchParams.set('cpf', cpf);
-        }
-        for (const [key, value] of urlParams.entries()) {
-          if (key !== 'cpf') {
-            chatUrl.searchParams.set(key, value);
-          }
-        }
-        window.location.href = chatUrl.toString();
+        const currentUrlParams = window.location.search;
+        const cpf = new URLSearchParams(currentUrlParams).get('cpf') || '';
+        window.location.href = `../chat?cpf=${cpf}${currentUrlParams.replace('?' + `cpf=${cpf}`, '')}`;
       });
+
 
       const interval = setInterval(() => {
         progress += incrementPerUpdate;
