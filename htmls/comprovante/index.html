@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <title>Comprovante Indenizatório</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 0rem 1rem;
+    }
+    .container {
+      max-width: 400px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .logo img {
+      max-width: 4rem;
+      height: auto;
+      display: block;
+    }
+    .title {
+      color: #830AD1;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    .separator {
+      border: none;
+      border-top: 2px solid #830AD1;
+      width: 100%;
+      margin: 0.75rem 0 1rem;
+    }
+    .main-card {
+      background-color: #F4F4F4;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      line-height: 1.4rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    .info-card {
+      background-color: #F4F4F4;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      width: 100%;
+      border-radius: 6px;
+    }
+    .info-card-title {
+      font-size: 0.9rem;
+      color: #000;
+      margin-bottom: 0.25rem;
+      font-weight: lighter;
+    }
+    .info-card-title.tax-title {
+      font-weight: normal; /* Regular para "Imposto de Recebimento" */
+    }
+    .info-card-value {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="images/nu.svg" alt="Logo">
+    </div>
+    <div class="title">Comprovante Indenizatório</div>
+    <hr class="separator">
+    <div class="main-card">
+      A Nubank, com base no processo indenizatório do Sr. (a) 
+      <span id="nomeCompleto" style="font-weight: bold;"></span>, 
+      portador do CPF <span id="cpfValue" style="font-weight: bold;"></span>,
+      confirma o direito à indenização por possuir cadastro na Nubank.
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Indenização a receber</div>
+      <div class="info-card-value">R$ 7.854,63</div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Protocolo</div>
+      <div class="info-card-value" id="protocoloValue"></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Data e Hora de Emissão</div>
+      <div class="info-card-value" id="issueDateTimeValue"></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">Vencimento</div>
+      <div class="info-card-value" id="dueDateTimeValue"></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title tax-title">Imposto de Recebimento</div>
+      <div class="info-card-value" id="taxValue"></div>
+    </div>
+  </div>
+  <script>
+    function formatDateTime(date) {
+      const day   = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year  = date.getFullYear();
+      const hour  = String(date.getHours()).padStart(2, '0');
+      const min   = String(date.getMinutes()).padStart(2, '0');
+      return `${day}/${month}/${year} ${hour}:${min}`;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const nomeCompletoParam = params.get('name') || '';
+    const cpfParam          = params.get('cpf') || '';
+    const protocoloParam = params.get('protocolo') || '2025486793746458';
+    const now = new Date();
+    const issueDateTime = formatDateTime(now);
+    const tenMinutesLater = new Date(now.getTime() + (10 * 60 * 1000));
+    const dueDateTime     = formatDateTime(tenMinutesLater);
+    const impostoRecebimento = 'R$ 61,90';
+    document.getElementById('nomeCompleto').textContent   = nomeCompletoParam;
+    document.getElementById('cpfValue').textContent       = cpfParam;
+    document.getElementById('protocoloValue').textContent = protocoloParam;
+    document.getElementById('issueDateTimeValue').textContent = issueDateTime;
+    document.getElementById('dueDateTimeValue').textContent   = dueDateTime;
+    document.getElementById('taxValue').textContent       = impostoRecebimento;
+  </script>
+
+</body></html>
