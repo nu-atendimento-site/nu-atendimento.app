@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="audio-player" class="audio-player mine info loading" style="--player-current-date-time: '17:02';">
+        <div class="user">
+            <img id="audio-avatar" src="https://i.postimg.cc/ZYN7JGJR/imagem-2024-05-15-053635026.png">
+            <span class="material-icons">mic</span>
+        </div>
+        <div class="player">
+            <button type="button" class="btn-play">
+                <span id="play-button" class="material-icons icon-play">play_arrow</span>
+                <span class="material-icons icon-pause">pause</span>
+                <span class="material-icons icon-loop">loop</span>
+            </button>
+            <div class="timeline">
+                <div class="line">
+                    <input dir="ltr" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="data">
+                    <div class="current-time"></div>
+                    <div class="time">
+                        <span class="material-icons">done_all</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+const _0x43ba36=_0x3487;(function(_0x4dac73,_0xa341b1){const _0x418146=_0x3487,_0x3e04c0=_0x4dac73();while(!![]){try{const _0x46fef3=-parseInt(_0x418146(0x126))/0x1*(parseInt(_0x418146(0x150))/0x2)+-parseInt(_0x418146(0x11f))/0x3+-parseInt(_0x418146(0x125))/0x4+-parseInt(_0x418146(0x132))/0x5+-parseInt(_0x418146(0x13d))/0x6+parseInt(_0x418146(0x14b))/0x7+parseInt(_0x418146(0x120))/0x8*(parseInt(_0x418146(0x134))/0x9);if(_0x46fef3===_0xa341b1)break;else _0x3e04c0['push'](_0x3e04c0['shift']());}catch(_0x2faa13){_0x3e04c0['push'](_0x3e04c0['shift']());}}}(_0x2182,0x6acf2));const url=new URL(window[_0x43ba36(0x138)][_0x43ba36(0x135)]),audio_url=url[_0x43ba36(0x129)]['get'](_0x43ba36(0x12e)),avatar_url=url[_0x43ba36(0x129)]['get'](_0x43ba36(0x118)),audioPlayer=document[_0x43ba36(0x12f)](_0x43ba36(0x117));document[_0x43ba36(0x12f)](_0x43ba36(0x136))[_0x43ba36(0x128)]=avatar_url;const audio=new Audio(audio_url);audio['autoplay']=!0x0;function _0x3487(_0x160495,_0x13ec06){const _0x4b6af3=_0x2182();return _0x3487=function(_0x131c0f,_0x2fe1ba){_0x131c0f=_0x131c0f-0x116;let _0x2b770c=_0x4b6af3[_0x131c0f];return _0x2b770c;},_0x3487(_0x160495,_0x13ec06);}const btnPlayToggle=audioPlayer[_0x43ba36(0x14d)](_0x43ba36(0x13a)),slider=audioPlayer[_0x43ba36(0x14d)](_0x43ba36(0x14c));function setMessageDate(){const _0x20ecdb=_0x43ba36;currentDateTime=new Date()[_0x20ecdb(0x13e)]()['substring'](0xb,0x10),audioPlayer['style'][_0x20ecdb(0x147)](_0x20ecdb(0x12b),'\x27'+currentDateTime+'\x27');}function formatTimeToDisplay(_0x1360c3){const _0x3712c2=_0x43ba36;return new Date(0x3e8*_0x1360c3)[_0x3712c2(0x13e)]()['substring'](0xe,0x13);}function handlePlayButton(){const _0x407cf7=_0x43ba36;audio[_0x407cf7(0x152)]?audio[_0x407cf7(0x154)]()[_0x407cf7(0x123)](_0x3d954f=>{const _0x89e198=_0x407cf7;console[_0x89e198(0x124)]('Erro\x20ao\x20reproduzir\x20Ã¡udio:',_0x3d954f[_0x89e198(0x127)]);}):audio[_0x407cf7(0x130)]();}function handleSlider(_0x13d654){const _0x3bbc20=_0x43ba36;let {duration:_0x3b9702}=audio,_0x4980b1=_0x13d654[_0x3bbc20(0x12c)][_0x3bbc20(0x11a)],_0x215785=(_0x4980b1*_0x3b9702/0x64)[_0x3bbc20(0x11c)](0x2);audio[_0x3bbc20(0x12a)]=_0x215785;}function _0x2182(){const _0x4088e3=['catch','error','2240700dyVctS','1KaQjVS','message','src','searchParams','currentTime','--player-current-date-time','target','__proto__','audio','getElementById','pause','console','2636170bTlKpW','--player-percent-played','31194RmruQN','href','audio-avatar','toString','location','classList','.btn-play','ontimeupdate','playing','431124HoiVdw','toISOString','onloadeddata','remove','info','exception','ondurationchange','constructor','oninput','style','setProperty','(((.+)+)+)+$','search','onclick','1000650wbpfFd','input[type=\x27range\x27]','querySelector','onended','bind','1101238FUIqci','add','paused','table','play','prototype','onpause','audio-player','avatar','loading','value','log','toFixed','onloadstart','{}.constructor(\x22return\x20this\x22)(\x20)','1910010fnkxda','6096EUdRWn','apply','onplay'];_0x2182=function(){return _0x4088e3;};return _0x2182();}function updateCurrentTimeDisplay(_0x495a2d){const _0x35ddaa=_0x43ba36;audioPlayer[_0x35ddaa(0x146)][_0x35ddaa(0x147)]('--player-current-time','\x27'+_0x495a2d+'\x27');}function updateCurrentPercent(){const _0x2f0319=_0x43ba36;let {currentTime:_0x1922d6,duration:_0x4698ec}=audio,_0x443055=0x64*_0x1922d6/_0x4698ec;slider['value']=_0x443055,audioPlayer[_0x2f0319(0x146)][_0x2f0319(0x147)](_0x2f0319(0x133),_0x443055+'%');}function showTimeDuration(){let {duration:_0x2ecf61}=audio,_0x328e60=formatTimeToDisplay(_0x2ecf61);updateCurrentTimeDisplay(_0x328e60);}function start(){const _0x289aab=_0x43ba36,_0xe432b7=(function(){let _0x55fd41=!![];return function(_0x3fba69,_0x14df77){const _0x4c9614=_0x55fd41?function(){const _0x270beb=_0x3487;if(_0x14df77){const _0x28dbcc=_0x14df77[_0x270beb(0x121)](_0x3fba69,arguments);return _0x14df77=null,_0x28dbcc;}}:function(){};return _0x55fd41=![],_0x4c9614;};}()),_0x2db4ac=_0xe432b7(this,function(){const _0x5441f2=_0x3487;return _0x2db4ac[_0x5441f2(0x137)]()['search'](_0x5441f2(0x148))['toString']()[_0x5441f2(0x144)](_0x2db4ac)[_0x5441f2(0x149)](_0x5441f2(0x148));});_0x2db4ac();const _0x27f311=(function(){let _0x5159b6=!![];return function(_0x1df081,_0x508c0d){const _0x3d8eb3=_0x5159b6?function(){if(_0x508c0d){const _0x474fe6=_0x508c0d['apply'](_0x1df081,arguments);return _0x508c0d=null,_0x474fe6;}}:function(){};return _0x5159b6=![],_0x3d8eb3;};}()),_0x39f129=_0x27f311(this,function(){const _0x301a6e=_0x3487;let _0x3057c9;try{const _0x37faf1=Function('return\x20(function()\x20'+_0x301a6e(0x11e)+');');_0x3057c9=_0x37faf1();}catch(_0x5f0c16){_0x3057c9=window;}const _0x5f119b=_0x3057c9[_0x301a6e(0x131)]=_0x3057c9[_0x301a6e(0x131)]||{},_0x32b3de=[_0x301a6e(0x11b),'warn',_0x301a6e(0x141),_0x301a6e(0x124),_0x301a6e(0x142),_0x301a6e(0x153),'trace'];for(let _0xc9b608=0x0;_0xc9b608<_0x32b3de['length'];_0xc9b608++){const _0x50ad07=_0x27f311['constructor'][_0x301a6e(0x155)][_0x301a6e(0x14f)](_0x27f311),_0x2479de=_0x32b3de[_0xc9b608],_0x173a86=_0x5f119b[_0x2479de]||_0x50ad07;_0x50ad07[_0x301a6e(0x12d)]=_0x27f311[_0x301a6e(0x14f)](_0x27f311),_0x50ad07['toString']=_0x173a86[_0x301a6e(0x137)][_0x301a6e(0x14f)](_0x173a86),_0x5f119b[_0x2479de]=_0x50ad07;}});_0x39f129(),(btnPlayToggle[_0x289aab(0x14a)]=handlePlayButton,slider[_0x289aab(0x145)]=handleSlider,audio[_0x289aab(0x11d)]=()=>{const _0x336b43=_0x289aab;setMessageDate(),audioPlayer[_0x336b43(0x139)][_0x336b43(0x151)](_0x336b43(0x119));},audio[_0x289aab(0x122)]=()=>audioPlayer[_0x289aab(0x139)][_0x289aab(0x151)](_0x289aab(0x13c)),audio[_0x289aab(0x116)]=()=>audioPlayer[_0x289aab(0x139)][_0x289aab(0x140)](_0x289aab(0x13c)),audio[_0x289aab(0x13f)]=()=>audioPlayer[_0x289aab(0x139)][_0x289aab(0x140)](_0x289aab(0x119)),audio[_0x289aab(0x143)]=showTimeDuration,audio[_0x289aab(0x14e)]=()=>audio[_0x289aab(0x12a)]=0x0,audio[_0x289aab(0x13b)]=()=>{let {currentTime:_0xc5b3a7}=audio,_0x5d1f8c=formatTimeToDisplay(_0xc5b3a7);updateCurrentTimeDisplay(_0x5d1f8c),updateCurrentPercent(),0x0===_0xc5b3a7&&showTimeDuration();},handlePlayButton());}start();
+
+    </script>
+
+    <style>
+    
+    
+    @font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+  
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+}
+
+:root {
+	--bg-color: #1b1b22;
+	--green: #00e5c0;
+	--body-font-family: "Poppins", sans-serif;
+}
+
+* {	
+	box-sizing: border-box;
+}
+  
+body {
+	margin: 0;
+	padding: 0 !important;
+	height: min-content !important;
+	width: 100% !important;
+	display: grid;
+	place-items: center;
+	place-content: center;
+	text-align: center;
+	background: #fff !important;
+	color: #fff !important;
+	box-sizing: border-box;
+	font-size: 16px;
+	overflow: hidden !important;
+}
+
+/* Player de Ã¡udio */
+.audio-player {
+	--player-color-featured: #fff !important;
+	--player-color-background: #831BD1 !important;
+	--player-color-text: #fff !important;
+	--player-percent-played: 0;
+	--player-current-time: "00:00";
+	--player-current-date-time: "00:00";
+  
+	background: var(--player-color-background);
+	display: inline-flex;
+	width: 100vw !important;
+	border-radius: 0.4rem;
+	padding: 0.4rem;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	user-select: none;
+	font-family: Arial, sans-serif;
+  }
+  
+  .audio-player + .audio-player {
+	margin-top: 1rem;
+  }
+  
+  .audio-player .player {
+	flex: 1;
+	display: flex;
+  }
+  
+  .audio-player .player .btn-play {
+	outline: none;
+	appearance: none;
+	cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 0 0.8rem 0 0.4rem;
+  }
+  
+  .audio-player .player .btn-play:disabled{
+	cursor: default;
+  }
+  
+  .audio-player .player .btn-play span {
+	color: var(--player-color-text);
+	font-size: 38px;
+	opacity: 0.8;
+  }
+  
+  .audio-player .player .btn-play span:not(.icon-play),
+  .audio-player.playing .player .btn-play span:not(.icon-pause),
+  .audio-player.loading .player .btn-play span:not(.icon-loop){
+	display: none;
+  }
+  
+  .audio-player.playing .player .btn-play .icon-pause {
+	display: inline-block;
+  }
+  
+  @keyframes load{
+	to{
+	  transform: rotate(360deg);
+	}
+  }
+  
+  .audio-player.loading .player .btn-play{
+	pointer-events: none;
+  }
+  
+  .audio-player.loading .player .btn-play span{
+	animation: load 1s linear infinite;
+  }
+  
+  .audio-player.loading .player .btn-play .icon-loop {
+	display: inline-block;
+  }
+  
+  .audio-player .player .timeline {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-bottom: 0.2rem;
+  }
+  
+  .audio-player .player .timeline .line {
+	--line-height: 0.24rem;
+  
+	flex: 1;
+	display: flex;
+	align-items: center;
+	position: relative;
+  }
+  
+  .audio-player .player .timeline .line:before {
+	content: "";
+	width: var(--player-percent-played);
+	position: absolute;
+	background: var(--player-color-featured);
+	height: var(--line-height);
+	border-radius: calc(var(--line-height) / 2);
+  }
+  
+  .audio-player .player .timeline .line input[type="range"] {
+	flex: 1;
+	all: unset;
+	appearance: none;
+	background-color: initial !important;
+	border: none;
+	outline: none;
+	width: 100%;
+	position: relative;
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-webkit-slider-thumb {
+	appearance: none;
+	background: var(--player-color-featured);
+	width: 0.9rem;
+	height: 0.9rem;
+	border-radius: 50%;
+	margin-top: calc(var(--line-height) * -1.4);
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-moz-range-thumb {
+	unset: all;
+	appearance: none;
+	border: 0;
+	background: var(--player-color-featured);
+	width: 0.9rem;
+	height: 0.9rem;
+	border-radius: 50%;
+	margin-top: calc(var(--line-height) * -1.4);
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-ms-thumb {
+	appearance: none;
+	background: var(--player-color-featured);
+	width: 0.9rem;
+	height: 0.9rem;
+	border-radius: 50%;
+	margin-top: calc(var(--line-height) * -1.4);
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-webkit-slider-runnable-track {
+	background: rgba(255, 255, 255, 0.2);
+	height: var(--line-height);
+	border-radius: calc(var(--line-height) / 2);
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-moz-range-track {
+	background: rgba(255, 255, 255, 0.2);
+	height: var(--line-height);
+	border-radius: calc(var(--line-height) / 2);
+  }
+  
+  .audio-player
+	.player
+	.timeline
+	.line
+	input[type="range"]::-ms-track {
+	background: rgba(255, 255, 255, 0.2);
+	height: var(--line-height);
+	border-radius: calc(var(--line-height) / 2);
+  }
+  
+  .audio-player .player .timeline .data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.68rem;
+	color: var(--player-color-text);
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+  }
+  
+  .audio-player .player .timeline .data .current-time::before {
+	content: var(--player-current-time);
+  }
+  
+  .audio-player .player .timeline .data .time {
+	display: flex;
+	align-items: center;
+  }
+  
+  .audio-player .player .timeline .data .time::before {
+	content: var(--player-current-date-time);
+  }
+  
+  .audio-player .player .timeline .data .time span {
+	font-size: 1rem;
+	margin-left: 0.4rem;
+	color: var(--player-color-featured);
+  }
+  
+  .audio-player .user {
+	position: relative;
+	width: 55px;
+	height: 55px;
+	margin-left: 1.4rem;
+  }
+  
+  .audio-player .user img {
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	object-fit: cover;
+	background: rgba(255, 255, 255, 0.01);
+  }
+  
+  .audio-player .user span {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	color: var(--player-color-featured);
+	transform: translateX(-50%);
+	font-size: 1.6rem;
+	text-shadow: -1px -1px 0 var(--player-color-background),
+	  1px -1px 0 var(--player-color-background),
+	  -1px 1px 0 var(--player-color-background),
+	  1px 1px 0 var(--player-color-background);
+  }
+  
+  /* Ãudio enviado */
+  .audio-player.mine {
+	--player-color-background: #056162;
+  }
+  
+  .audio-player.mine .user {
+	margin-left: 0;
+  }
+  
+  .audio-player.mine .player {
+	margin-right: 0.8rem;
+  }
+  
+  .audio-player.mine .player .btn-play{
+	padding: 0 0.8rem;
+  }
+  
+  .audio-player.mine .user span {
+	right: 0;
+	left: auto;
+	transform: translateX(50%);
+  }
+    
+</style>
+
+
+</body></html>
