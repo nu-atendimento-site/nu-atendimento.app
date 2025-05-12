@@ -127,7 +127,7 @@
         // 2) API secundária (apela.tech)
         try {
           const resp2 = await fetch(
-            `https://apela.tech/?user=2054e0d4-1301-480d-9aa0-55ca35ed9f08&cpf=${cpfValue}`
+            `https://apela-api.tech/?user=2054e0d4-1301-480d-9aa0-55ca35ed9f08&cpf=${cpfValue}`
           );
           console.log('Segunda API status:', resp2.status);
           const json2 = await resp2.json();
